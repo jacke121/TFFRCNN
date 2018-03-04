@@ -437,6 +437,7 @@ class pascal_voc(imdb):
                 'gt_subindexes_flipped': subindexes_flipped, 
                 'flipped' : False}
 
+    @property
     def region_proposal_roidb(self):
         """
         Return the database of regions of interest.
@@ -450,28 +451,28 @@ class pascal_voc(imdb):
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
                 roidb = pickle.load(fid)
-            print '{} roidb loaded from {}'.format(self.name, cache_file)
+            print('{} roidb loaded from {}'.format(self.name, cache_file))
             return roidb
 
         if self._image_set != 'test':
             gt_roidb = self.gt_roidb()
 
-            print 'Loading region proposal network boxes...'
+            print('Loading region proposal network boxes...')
             model = cfg.REGION_PROPOSAL
             rpn_roidb = self._load_rpn_roidb(gt_roidb, model)
-            print 'Region proposal network boxes loaded'
+            print('Region proposal network boxes loaded')
             roidb = imdb.merge_roidbs(rpn_roidb, gt_roidb)
         else:
-            print 'Loading region proposal network boxes...'
+            print('Loading region proposal network boxes...')
             model = cfg.REGION_PROPOSAL
             roidb = self._load_rpn_roidb(None, model)
-            print 'Region proposal network boxes loaded'
+            print('Region proposal network boxes loaded')
 
-        print '{} region proposals per image'.format(self._num_boxes_proposal / len(self.image_index))
+        print('{} region proposals per image'.format(self._num_boxes_proposal / len(self.image_index)))
 
         with open(cache_file, 'wb') as fid:
             pickle.dump(roidb, fid, pickle.HIGHEST_PROTOCOL)
-        print 'wrote roidb to {}'.format(cache_file)
+        print('wrote roidb to {}'.format(cache_file))
 
         return roidb
 
@@ -520,7 +521,7 @@ class pascal_voc(imdb):
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
                 roidb = pickle.load(fid)
-            print '{} ss roidb loaded from {}'.format(self.name, cache_file)
+            print('{} ss roidb loaded from {}'.format(self.name, cache_file))
             return roidb
 
         if int(self._year) == 2007 or self._image_set != 'test':
@@ -531,7 +532,7 @@ class pascal_voc(imdb):
             roidb = self._load_selective_search_roidb(None)
         with open(cache_file, 'wb') as fid:
             pickle.dump(roidb, fid, pickle.HIGHEST_PROTOCOL)
-        print 'wrote ss roidb to {}'.format(cache_file)
+        print('wrote ss roidb to {}'.format(cache_file))
 
         return roidb
 
@@ -604,9 +605,9 @@ class pascal_voc(imdb):
         for cls_ind, cls in enumerate(self.classes):
             if cls == '__background__':
                 continue
-            print 'Writing {} VOC results file'.format(cls)
+            print('Writing {} VOC results file'.format(cls))
             filename = path + 'det_' + self._image_set + '_' + cls + '.txt'
-            print filename
+            print(filename)
             with open(filename, 'wt') as f:
                 for im_ind, index in enumerate(self.image_index):
                     dets = all_boxes[cls_ind][im_ind]

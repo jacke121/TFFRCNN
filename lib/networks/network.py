@@ -2,12 +2,12 @@ import numpy as np
 import tensorflow as tf
 
 from fast_rcnn.config import cfg
-from roi_pooling_layer import roi_pooling_op as roi_pool_op
+# from roi_pooling_layer import roi_pooling_op as roi_pool_op
 from rpn_msr.proposal_layer_tf import proposal_layer as proposal_layer_py
 from rpn_msr.anchor_target_layer_tf import anchor_target_layer as anchor_target_layer_py
-from ..rpn_msr.proposal_target_layer_tf import proposal_target_layer as proposal_target_layer_py
+from rpn_msr.proposal_target_layer_tf import proposal_target_layer as proposal_target_layer_py
 # FCN pooling
-from ..psroi_pooling_layer import psroi_pooling_op as psroi_pooling_op
+from psroi_pooling_layer import psroi_pooling_op as psroi_pooling_op
 
 
 DEFAULT_PADDING = 'SAME'
@@ -218,21 +218,21 @@ class Network(object):
                               padding=padding,
                               name=name)
 
-    @layer
-    def roi_pool(self, input, pooled_height, pooled_width, spatial_scale, name):
-        # only use the first input
-        if isinstance(input[0], tuple):
-            input[0] = input[0][0]
-
-        if isinstance(input[1], tuple):
-            input[1] = input[1][0]
-
-        print(input)
-        return roi_pool_op.roi_pool(input[0], input[1],
-                                    pooled_height,
-                                    pooled_width,
-                                    spatial_scale,
-                                    name=name)[0]
+    # @layer
+    # def roi_pool(self, input, pooled_height, pooled_width, spatial_scale, name):
+    #     # only use the first input
+    #     if isinstance(input[0], tuple):
+    #         input[0] = input[0][0]
+    #
+    #     if isinstance(input[1], tuple):
+    #         input[1] = input[1][0]
+    #
+    #     print(input)
+    #     return roi_pool_op.roi_pool(input[0], input[1],
+    #                                 pooled_height,
+    #                                 pooled_width,
+    #                                 spatial_scale,
+    #                                 name=name)[0]
 
     @layer
     def psroi_pool(self, input, output_dim, group_size, spatial_scale, name):
