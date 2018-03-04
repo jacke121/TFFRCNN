@@ -77,10 +77,10 @@ if __name__ == '__main__':
     imdb.competition_mode(args.comp_mode)
 
     device_name = '/gpu:{:d}'.format(args.gpu_id)
-    print device_name
+    print(device_name)
 
     network = get_network(args.network_name)
-    print 'Use network `{:s}` in training'.format(args.network_name)
+    print('Use network `{:s}` in training'.format(args.network_name))
 
     cfg.GPU_ID = args.gpu_id
 

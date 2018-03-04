@@ -153,9 +153,9 @@ class PVAnet_train(Network):
                     try:
                         var = tf.get_variable(subkey)
                         session.run(var.assign(data_dict[key][subkey]))
-                        print "assign pretrain model " + subkey + " to " + key + '/' + subkey
+                        print("assign pretrain model " + subkey + " to " + key + '/' + subkey)
                     except ValueError:
-                        print "ignore " + key + '/' + subkey + ' shape:', data_dict[key][subkey].shape
+                        print("ignore " + key + '/' + subkey + ' shape:', data_dict[key][subkey].shape)
                         if not ignore_missing:
 
                             raise

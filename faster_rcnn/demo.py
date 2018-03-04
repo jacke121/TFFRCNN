@@ -126,15 +126,15 @@ if __name__ == '__main__':
 
     # Warmup on a dummy image
     im = 128 * np.ones((300, 300, 3), dtype=np.uint8)
-    for i in xrange(2):
+    for i in range(2):
         _, _ = im_detect(sess, net, im)
 
     im_names = glob.glob(os.path.join(cfg.DATA_DIR, 'demo', '*.png')) + \
                glob.glob(os.path.join(cfg.DATA_DIR, 'demo', '*.jpg'))
 
     for im_name in im_names:
-        print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-        print 'Demo for {:s}'.format(im_name)
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print('Demo for {:s}'.format(im_name))
         demo(sess, net, im_name)
 
     plt.show()
