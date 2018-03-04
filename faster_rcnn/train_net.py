@@ -17,6 +17,20 @@ import os.path
 
 this_dir = os.path.dirname(__file__)
 sys.path.insert(0, this_dir + '/..')
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(current_dir + "/../lib/roi_pooling_layer")
+
+sys.path.append(current_dir + "/../lib/roi_data_layer")
+sys.path.append(current_dir + "/../lib/gt_data_layer")
+sys.path.append(current_dir + "/../fast_rcnn")
+sys.path.append(current_dir + "/../lib/utils")
+sys.path.append(current_dir + "/../lib/rpn_msr")
+sys.path.append(current_dir + "/../lib/networks")
+sys.path.append(current_dir + "/../lib/datasets")
+sys.path.append(current_dir + "/../lib/pycocotools")
+
+
 # for p in sys.path: print p
 # print (this_dir)
 

@@ -13,14 +13,14 @@ from tensorflow.python.client import timeline
 import cv2
 
 from .nms_wrapper import nms_wrapper
-from ..roi_data_layer.layer import RoIDataLayer
-from ..utils.timer import Timer
-from ..gt_data_layer import roidb as gdl_roidb
-from ..roi_data_layer import roidb as rdl_roidb
+from roi_data_layer.layer import RoIDataLayer
+from utils.timer import Timer
+from gt_data_layer import roidb as gdl_roidb
+from roi_data_layer import roidb as rdl_roidb
 
 # >>>> obsolete, because it depends on sth outside of this project
-from ..fast_rcnn.config import cfg
-from ..fast_rcnn.bbox_transform import clip_boxes, bbox_transform_inv
+from fast_rcnn.config import cfg
+from fast_rcnn.bbox_transform import clip_boxes, bbox_transform_inv
 # <<<< obsolete
 
 _DEBUG = False

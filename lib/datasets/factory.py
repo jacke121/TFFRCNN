@@ -11,9 +11,9 @@ __sets = {}
 
 import numpy as np
 
-from .pascal_voc import pascal_voc
-from .imagenet3d import imagenet3d
-from .kitti import kitti
+from pascal_voc import pascal_voc
+import imagenet3d
+import kitti
 from .kitti_tracking import kitti_tracking
 from .nthu import nthu
 from .coco import coco
@@ -39,7 +39,7 @@ for year in ['2007', '2012', '0712']:
 # Set up kittivoc
     for split in ['train', 'val', 'trainval', 'test']:
         name = 'kittivoc_{}'.format(split)
-        print name
+        print(name)
         __sets[name] = (lambda split=split: kittivoc(split))
 
 # # KITTI dataset
@@ -63,7 +63,7 @@ for year in ['2015']:
 # NTHU dataset
 for split in ['71', '370']:
     name = 'nthu_{}'.format(split)
-    print name
+    print(name)
     __sets[name] = (lambda split=split: nthu(split))
 
 
