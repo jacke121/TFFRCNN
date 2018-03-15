@@ -48,6 +48,29 @@ __C.SUBCLS_NAME = 'voxel_exemplars'
 __C.TRAIN = edict()
 # Adam, Momentum, RMS
 __C.TRAIN.SOLVER = 'Momentum'
+
+# Root directory of project
+__C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..', '..'))
+
+import platform
+
+
+def getSystem():
+    if 'Windows' in platform.system():
+        return "win"
+    if 'Linux' in platform.system():
+        return "linux"
+
+
+if  "win" in getSystem():
+    __C.DATA_DIR = r"D:\data\pascal_voc"  # osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
+else:
+    __C.DATA_DIR = r"/home/lbg/data/labmouse_recdata"  # osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
+
+
+# Model directory
+__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models', 'pascal_voc'))
+
 # learning rate
 __C.TRAIN.WEIGHT_DECAY = 0.0005
 __C.TRAIN.LEARNING_RATE = 0.001
@@ -234,14 +257,7 @@ __C.RNG_SEED = 3
 # A small number that's used many times
 __C.EPS = 1e-14
 
-# Root directory of project
-__C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..', '..'))
 
-# Data directory
-__C.DATA_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
-
-# Model directory
-__C.MODELS_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'models', 'pascal_voc'))
 
 # Name (or path to) the matlab executable
 __C.MATLAB = 'matlab'
@@ -289,9 +305,9 @@ def _merge_a_into_b(a, b):
     if type(a) is not edict:
         return
 
-    for k, v in a.iteritems():
+    for k, v in a.items():
         # a must specify keys that are in b
-        if not b.has_key(k):
+        if not k in b:
             raise KeyError('{} is not a valid config key'.format(k))
 
         # the types must match, too
